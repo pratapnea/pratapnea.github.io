@@ -10,22 +10,52 @@
 	</style>
 </head>
 <body>
-	<div class="main">
+
+	<div class="main" id="loading">
+		loading ...
+	</div>
+
+
+	<div class="main" id="mainContainer" hidden>
 		<!-- Profile image -->
-		<img src="https://avatars.githubusercontent.com/u/31404925?v=4" 
-		alt="Pratap Neaupane"
-		width="150px"
-		height="150px" >
+		<img  
+			id="profilePic"
+			alt="Pratap Neaupane"
+			width="150px"
+			height="150px" >
 
 		<!-- Username -->
-		<h2>Pratap Neaupane</h2>
-		<!-- tag line -->
-		<p>Keep Calm and Code</p>
+		<h2 id="fullName"></h2>
+		<!-- bio -->
+		<p id="bio"></p>
 		<!-- followers -->
-		<h5>I have 7 awesome followers</h5>
+		<h5 id="followers"></h5>
+		<p>
+			Check me on <a id="githubLink">GitHub</a>	
+		</p>
 	
 
 	</div>
+
+	<!-- script to fetch my personal data using github api -->
+	<script type="text/javascript">
+		fetch("https://api.github.com/users/pratapnea")
+			.then(response => response.json())
+			.then(function(data) {
+
+				let followersCount = data['followers']
+				let followersInfo = `I have been followed by ${followersCount} awesome people on GitHub`
+
+				document.getElementById('profilePic').src = data['avatar_url']
+				document.getElementById('fullName').textContent = data['name']
+				document.getElementById('bio').textContent = data['bio']
+				document.getElementById('followers').textContent = followersInfo
+				document.getElementById('githubLink').href = data['html_url']
+				document.getElementById('mainContainer').hidden = false
+				document.getElementById('loading').hidden = true
+			})
+		
+	</script>
 
 </body>
 </html>
