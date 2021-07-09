@@ -4,10 +4,6 @@
 	<meta charset="utf-8">
 	<title>Pratap Neaupane</title>
 	<style type="text/css">
-		.main {
-			text-align: center;
-		}
-
 		.loader {
 			position: absolute;
 			left: 50%;
@@ -27,6 +23,23 @@
 			100% { transform: rotate(360deg); }
 		}
 
+		.main {
+			text-align: center;
+		}
+
+
+		.column {
+		  	float: left;
+		  	width: 33.33%;
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+		  	content: "";
+		  	display: table;
+		  	clear: both;
+		}
+
 	</style>
 </head>
 <body>
@@ -34,38 +47,49 @@
 	<div class="loader" id="loading"></div>		
 
 
-	<div class="main" id="mainContainer" hidden>
-		<!-- Profile image -->
-		<img  
-			id="profilePic"
-			alt="Pratap Neaupane"
-			width="150px"
-			height="150px" >
+	<div id="mainContainer" class="row" hidden>
+		<div class="main column">
 
-		<!-- Username -->
-		<h2 id="fullName"></h2>
-		<!-- bio -->
-		<p id="bio"></p>
-		<!-- followers -->
-		<h5 id="followers"></h5>
-		<p>
-			Check me on <a id="githubLink">GitHub</a>	
-		</p>
+			<!-- Profile image -->
+			<img  
+				id="profilePic"
+				alt="Pratap Neaupane"
+				width="150px"
+				height="150px" >
 
-		<!-- Twitter Section -->
-		<div class="col-sm-6">
-			<a class="twitter-timeline" data-width="400" data-height="300" data-theme="light" href="https://twitter.com/pratapnea?ref_src=twsrc%5Etfw">Tweets by pratapnea</a> 
-			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			<!-- Username -->
+			<h2 id="fullName"></h2>
+
+			<!-- bio -->
+			<p id="bio"></p>
+
+			<!-- followers -->
+			<h5 id="followers"></h5>
+			<!-- GitHub Link -->
+			<p>
+				Check me on <a id="githubLink">GitHub</a>	
+			</p>
 		</div>
 
-		<!-- Repo Section -->
+		<div class="column">
+			<!-- Repo Section -->
 			<div id="repoContainer" hidden>
-				<h2>My Repos:</h2>
+				<h2>My Projects:</h2>
 				<p id="repoName"></p>
 			</div>
-	
+		</div>
 
+		<div class="main column">
+			<!-- Twitter Section -->
+			<div class="tweet-section">
+				<a class="twitter-timeline" data-width="400" data-height="600" data-theme="light" href="https://twitter.com/pratapnea?ref_src=twsrc%5Etfw">Tweets by pratapnea</a> 
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</div>
+		</div>
+		
 	</div>
+
+
 
 	<!-- script to fetch my personal data using github api -->
 	<script type="text/javascript">
@@ -90,10 +114,10 @@
 				.then(response => response.json())
 				.then(function(data){
 					let repos = ''
-
+					console.log(data.length)
 					for (var i = 0; i < data.length; i++) {
 						if ((data[i]['language'] == "Python") || (data[i]['language']=="Java")) {
-							repos +=  data[i]['name'] + " [<strong> " + data[i]['language'] +" </strong>]<br>"
+							repos +=  "<strong> " + data[i]['name'] + "</strong> [ <em>" + data[i]['language'] + "</em> ]<br><br>"
 						}
 					}
 
