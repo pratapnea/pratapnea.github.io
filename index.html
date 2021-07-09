@@ -29,8 +29,8 @@
 
 
 		.column {
-		  	float: left;
-		  	width: 33.33%;
+		 	float: left;
+		 	width: 33.33%;
 		}
 
 		/* Clear floats after the columns */
@@ -38,6 +38,12 @@
 		  	content: "";
 		  	display: table;
 		  	clear: both;
+		}
+
+		@media screen and (max-width: 600px) {
+  			.column {
+   				width: 100%;
+  			}
 		}
 
 	</style>
@@ -72,18 +78,18 @@
 		</div>
 
 		<div class="column">
-			<!-- Repo Section -->
-			<div id="repoContainer" hidden>
-				<h2>My Projects:</h2>
-				<p id="repoName"></p>
+			<!-- Twitter Section -->
+			<div class="main">
+				<a class="twitter-timeline" data-width="500" data-height="600" data-theme="light" href="https://twitter.com/pratapnea?ref_src=twsrc%5Etfw">Tweets by pratapnea</a> 
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</div>
 		</div>
 
-		<div class="main column">
-			<!-- Twitter Section -->
-			<div class="tweet-section">
-				<a class="twitter-timeline" data-width="400" data-height="600" data-theme="light" href="https://twitter.com/pratapnea?ref_src=twsrc%5Etfw">Tweets by pratapnea</a> 
-				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		<div class="column">
+			<!-- Repo Section -->
+			<div id="repoContainer" style=" padding-left: 50px;" hidden>
+				<h2>My Projects:</h2>
+				<p id="repoName"></p>
 			</div>
 		</div>
 		
