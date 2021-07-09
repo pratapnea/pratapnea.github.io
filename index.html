@@ -57,6 +57,12 @@
 			<a class="twitter-timeline" data-width="400" data-height="300" data-theme="light" href="https://twitter.com/pratapnea?ref_src=twsrc%5Etfw">Tweets by pratapnea</a> 
 			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 		</div>
+
+		<!-- Repo Section -->
+			<div id="repoContainer" hidden>
+				<h2>My Repos:</h2>
+				<p id="repoName"></p>
+			</div>
 	
 
 	</div>
@@ -78,6 +84,23 @@
 				document.getElementById('mainContainer').hidden = false
 				document.getElementById('loading').hidden = true
 			})
+
+			/*Fetching user public repositories from Github*/
+			fetch("https://api.github.com/users/pratapnea/repos")
+				.then(response => response.json())
+				.then(function(data){
+					let repos = ''
+
+					for (var i = 0; i < data.length; i++) {
+						if ((data[i]['language'] == "Python") || (data[i]['language']=="Java")) {
+							repos +=  data[i]['name'] + " [<strong> " + data[i]['language'] +" </strong>]<br>"
+						}
+					}
+
+					document.getElementById('repoName').innerHTML = repos 
+
+					document.getElementById('repoContainer').hidden = false
+				})
 		
 	</script>
 
